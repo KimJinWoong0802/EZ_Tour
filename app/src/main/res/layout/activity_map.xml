@@ -60,6 +60,7 @@ xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/img_hlep"
         android:layout_width="320dp"
         android:layout_height="600dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/map_View"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
@@ -74,7 +75,7 @@ xmlns:tools="http://schemas.android.com/tools"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_search"
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -83,7 +84,7 @@ xmlns:tools="http://schemas.android.com/tools"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_map"
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -92,7 +93,7 @@ xmlns:tools="http://schemas.android.com/tools"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_mypage"
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

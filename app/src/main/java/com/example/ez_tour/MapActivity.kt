@@ -9,11 +9,13 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -31,6 +33,7 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
     val PERMISSIONS_REQUEST_CODE = 100
     var REQUIRED_PERMISSIONS = arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
@@ -41,6 +44,7 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
         val mapViewContainer = map_view
         mapViewContainer.addView(mapView)
 
+        mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))
 
         //Help 이미지 초기화
         val img_hlep = findViewById<View>(R.id.img_hlep) as ImageView
@@ -51,9 +55,22 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
         // GPS 마커 초기화.
         val gpsmarker = MapPOIItem()
         val btn_gps = findViewById<Button>(R.id.btn_gps) as ImageButton
+        // 하단 버튼 초기화
+        val btn_search = findViewById<Button>(R.id.btn_search)
+        val btn_mypage = findViewById<Button>(R.id.btn_mypage)
 
+        // search 버튼 클릭리스너
+        btn_search.setOnClickListener {
+            val intent = Intent(this, search::class.java)
+            startActivity(intent)
+        }
+        // mypage 버튼 클릭리스너
+        btn_mypage.setOnClickListener {
+            val intent = Intent(this, mypage::class.java)
+            startActivity(intent)
+        }
 
-            //Help 버튼 클릭리스너
+        //Help 버튼 클릭리스너
         btn_help.setOnClickListener {
             if (counter == 0) {
                 counter++
@@ -82,17 +99,12 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
                     val uNowPosition = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
 
                     mapView.setMapCenterPoint(uNowPosition, true)
-                  //  gpsmarker.mapPoint = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
+                    gpsmarker.mapPoint = MapPoint.mapPointWithGeoCoord(uLatitude, uLongitude)
                     gpsmarker.itemName= "현재위치"
                     gpsmarker.tag = 0
-                    gpsmarker.markerType = MapPOIItem.MarkerType.CustomImage
-                    gpsmarker.customImageResourceId = R.drawable.marker
-                    gpsmarker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
-                    gpsmarker.customSelectedImageResourceId = R.drawable.marker
-                    gpsmarker.isCustomImageAutoscale = false
-                    gpsmarker.setCustomImageAnchor(0.5f,1.0f)
+                    gpsmarker.markerType = MapPOIItem.MarkerType.BluePin
+                    gpsmarker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
                     mapView.addPOIItem(gpsmarker)
-
                 } catch (e: NullPointerException) {
                     Log.e("LOCATION_ERROR", e.toString())
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -105,6 +117,7 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
                     startActivity(intent)
                     System.exit(0)
                 }
+
             } else {
                 Toast.makeText(this, "위치 권한이 없습니다.", Toast.LENGTH_SHORT).show()
                 ActivityCompat.requestPermissions(
@@ -119,6 +132,23 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
         }
 
 
+    }
+    class CustomBalloonAdapter(inflater: LayoutInflater): CalloutBalloonAdapter {
+        val mCalloutBalloon: View = inflater.inflate(R.layout.customballoon, null)
+        val name: TextView = mCalloutBalloon.findViewById(R.id.text_name)
+        val address: TextView = mCalloutBalloon.findViewById(R.id.text_address)
+
+        override fun getCalloutBalloon(poiItem: MapPOIItem?): View {
+            // 마커 클릭 시 나오는 말풍선
+            name.text = "이름 설정"   // 해당 마커의 정보 이용 가능
+            address.text = "주소 설정"
+            return mCalloutBalloon
+        }
+
+        override fun getPressedCalloutBalloon(poiItem: MapPOIItem?): View {
+            // 말풍선 클릭 시
+            return mCalloutBalloon
+        }
     }
 
     override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {

@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_search"
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -84,7 +84,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_map"
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -93,7 +93,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_mypage"
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
