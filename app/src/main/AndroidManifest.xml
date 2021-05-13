@@ -12,12 +12,15 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EZ_Tour">
-        <!--Main-->
+        android:theme="@style/Theme.EZ_Tour"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".appinfo"></activity>
+        <activity android:name=".mypage" />
+        <activity android:name=".search" />
+        <activity android:name=".information" /> <!-- Main -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,29 +28,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Login">
             <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <!-- 네이티브 앱 키 확인 -->
-                <data android:host="oauth"
-                android:scheme="kakao61c8188e57dfd2ad836236244c72f0e4" />
-             </intent-filter>
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao61c8188e57dfd2ad836236244c72f0e4" />
+            </intent-filter>
         </activity>
-
-        <activity android:name=".MapActivity" >
-
-        </activity>
+        <activity android:name=".MapActivity" />
 
         <meta-data
             android:name="EZ_Tour"
-            android:value="61c8188e57dfd2ad836236244c72f0e4" />
-        <!--Map용 네이티브 앱키 확인-->
+            android:value="61c8188e57dfd2ad836236244c72f0e4" /> <!-- Map용 네이티브 앱키 확인 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="61c8188e57dfd2ad836236244c72f0e4"/>
+            android:value="61c8188e57dfd2ad836236244c72f0e4" />
     </application>
 
 </manifest>
