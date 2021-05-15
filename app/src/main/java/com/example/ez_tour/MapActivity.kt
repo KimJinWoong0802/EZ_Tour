@@ -142,6 +142,7 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
             // 마커 클릭 시 나오는 말풍선
             name.text = "이름 설정"   // 해당 마커의 정보 이용 가능
             address.text = "주소 설정"
+
             return mCalloutBalloon
         }
 
