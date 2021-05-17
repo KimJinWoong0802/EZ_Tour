@@ -46,6 +46,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation files('libs\\libDaumMapAndroid.jar')
+    implementation 'com.google.firebase:firebase-database-ktx:19.4.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -54,4 +55,5 @@ dependencies {
     implementation "com.kakao.sdk:v2-link:2.0.5" // 메시지(카카오링크)
     implementation platform('com.google.firebase:firebase-bom:28.0.1')// 파베
     implementation 'com.google.firebase:firebase-analytics-ktx'// 파베
+    implementation 'com.android.support:recyclerview-v7:26.1.0' // 리사이클뷰
 }

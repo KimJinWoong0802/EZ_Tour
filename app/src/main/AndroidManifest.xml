@@ -17,8 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EZ_Tour"
         android:usesCleartextTraffic="true">
-        <activity android:name=".appinfo"></activity>
-        <activity android:name=".mypage" />
+        <activity android:name=".AppinfoActivity"></activity>
+        <activity android:name=".MypageActivity" />
         <activity android:name=".search" />
         <activity android:name=".information" /> <!-- Main -->
         <activity android:name=".MainActivity">

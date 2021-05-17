@@ -61,12 +61,12 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
 
         // search 버튼 클릭리스너
         btn_search.setOnClickListener {
-            val intent = Intent(this, search::class.java)
+            val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
         // mypage 버튼 클릭리스너
         btn_mypage.setOnClickListener {
-            val intent = Intent(this, mypage::class.java)
+            val intent = Intent(this, MypageActivity::class.java)
             startActivity(intent)
         }
 
@@ -132,16 +132,21 @@ class MapActivity : AppCompatActivity(), MapView.POIItemEventListener {
         }
 
 
+
+
     }
+
     class CustomBalloonAdapter(inflater: LayoutInflater): CalloutBalloonAdapter {
         val mCalloutBalloon: View = inflater.inflate(R.layout.customballoon, null)
         val name: TextView = mCalloutBalloon.findViewById(R.id.text_name)
         val address: TextView = mCalloutBalloon.findViewById(R.id.text_address)
-
+        val image: ImageView = mCalloutBalloon.findViewById(R.id.view_image)
         override fun getCalloutBalloon(poiItem: MapPOIItem?): View {
             // 마커 클릭 시 나오는 말풍선
             name.text = "이름 설정"   // 해당 마커의 정보 이용 가능
             address.text = "주소 설정"
+
+
 
             return mCalloutBalloon
         }

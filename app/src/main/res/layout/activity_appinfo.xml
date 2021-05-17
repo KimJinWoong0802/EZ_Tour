@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".appinfo">
+    tools:context=".AppinfoActivity">
 
     <TextView
         android:id="@+id/text_Title2"
@@ -24,7 +24,6 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="264dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_help2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />

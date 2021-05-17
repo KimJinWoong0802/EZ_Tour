@@ -9,23 +9,45 @@
     <TextView
         android:id="@+id/text_Title3"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="23dp"
         android:background="#03A9F4"
         android:gravity="center"
-        android:text="TextView"
+        android:text="회원님을 위해 준비한 공간이에요"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/btn_appinfo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="#009688"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/text_bookmark"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center|center_horizontal"
+            android:text="찜한 곳들"
+            android:textColor="#FFFFFF" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="327dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
@@ -56,6 +78,16 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/view_profile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_Title3"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <ImageButton
         android:id="@+id/btn_appinfo"
         android:layout_width="wrap_content"
@@ -66,4 +98,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_Title3"
         app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    <TextView
+        android:id="@+id/text_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="회원님"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
