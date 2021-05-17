@@ -55,5 +55,5 @@ dependencies {
     implementation "com.kakao.sdk:v2-link:2.0.5" // 메시지(카카오링크)
     implementation platform('com.google.firebase:firebase-bom:28.0.1')// 파베
     implementation 'com.google.firebase:firebase-analytics-ktx'// 파베
-    implementation 'com.android.support:recyclerview-v7:26.1.0' // 리사이클뷰
+    implementation 'androidx.recyclerview:recycleview:1.1.0' // 리사이클뷰
 }

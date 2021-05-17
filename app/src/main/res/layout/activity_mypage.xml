@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mypage">
+    tools:context=".MypageActivity">
 
     <TextView
         android:id="@+id/text_Title3"
@@ -38,7 +38,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="327dp" />
+            android:layout_height="327dp"
+            app:layoutMananger = "androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation ="vertical"
+            tools:listitem="@layout/viewholder"/>
 
     </LinearLayout>
 
