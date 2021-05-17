@@ -45,7 +45,7 @@ class MypageActivity : AppCompatActivity() {
 
 
         btn_search.setOnClickListener {
-            val intent = Intent(this, search::class.java)
+            val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
         // mypage 버튼 클릭리스너
