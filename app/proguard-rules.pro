@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class net.daum.mf.map.n.** { *; }
+-keep class net.daum.mf.map.api.MapView { *; }
+-keep class net.daum.android.map.location.MapViewLocationManager { *; }
+-keep class net.daum.mf.map.api.MapPOIItem { *;}
+-keep class net.daum.mf.map.api.MapPoint {*;}

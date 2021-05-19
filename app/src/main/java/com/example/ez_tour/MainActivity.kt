@@ -9,18 +9,26 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause.*
+import com.kakao.sdk.user.UserApiClient
 import java.security.MessageDigest
 
 class MainActivity : AppCompatActivity() {
+
+    private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private val databaseReference: DatabaseReference = firebaseDatabase.getReference()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         try {
-            val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+            val info =
+                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
             val signatures = info.signingInfo.apkContentsSigners
             val md = MessageDigest.getInstance("SHA")
             for (signature in signatures) {
@@ -30,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 val key = String(Base64.encode(md.digest(), 0))
                 Log.d("Hash key:", "!!!!!!!$key!!!!!!")
             }
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             Log.e("name not found", e.toString())
         }
 
@@ -46,7 +54,8 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "유효하지 않은 앱", Toast.LENGTH_SHORT).show()
                     }
                     error.toString() == InvalidGrant.toString() -> {
-                        Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT)
+                            .show()
                     }
                     error.toString() == InvalidRequest.toString() -> {
                         Toast.makeText(this, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
@@ -55,7 +64,8 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
                     }
                     error.toString() == Misconfigured.toString() -> {
-                        Toast.makeText(this, "설정이 올바르지 않음(android key hash)", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "설정이 올바르지 않음(android key hash)", Toast.LENGTH_SHORT)
+                            .show()
                     }
                     error.toString() == ServerError.toString() -> {
                         Toast.makeText(this, "서버 내부 에러", Toast.LENGTH_SHORT).show()
@@ -68,8 +78,7 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
-            }
-            else if (token != null) {
+            } else if (token != null) {
                 Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MapActivity::class.java)
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
@@ -77,11 +86,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_login.setOnClickListener {
-            if(LoginClient.instance.isKakaoTalkLoginAvailable(this)){
+            if (LoginClient.instance.isKakaoTalkLoginAvailable(this)) {
                 LoginClient.instance.loginWithKakaoTalk(this, callback = callback)
-            }else{
+            } else {
                 LoginClient.instance.loginWithKakaoAccount(this, callback = callback)
+            }
+
+            UserApiClient.instance.me { user, error ->
+                if (error != null) {
+                    Toast.makeText(this, "사용자 정보 요청 실패", Toast.LENGTH_SHORT).show()
+                } else if (user != null) {
+                    databaseReference.child("사용자").child("${user.id}").child("카카오").child("ID").setValue("${user.id}","ID:")
+                    databaseReference.child("사용자").child("${user.id}").child("카카오").child("닉네임").setValue("${user.kakaoAccount?.profile?.nickname}","닉네임")
+                    databaseReference.child("사용자").child("${user.id}").child("카카오").child("프로필URL").setValue("${user.kakaoAccount?.profile?.thumbnailImageUrl}","프로필URL")
+                    //   "\n이메일: ${user.kakaoAccount?.email}" +
+                    //  "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                }
             }
         }
     }
+
+
+
 }

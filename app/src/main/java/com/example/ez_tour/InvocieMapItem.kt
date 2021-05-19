@@ -1,8 +1,17 @@
-package com.example.ez_tour
+import com.google.firebase.database.Exclude
+import com.google.firebase.database.IgnoreExtraProperties
 
-import net.daum.mf.map.api.MapPoint
+@IgnoreExtraProperties
+data class Post(
+    var uid: String? = "",
+    var nickname: String? = "",
+) {
 
-class InvoiceMapItem {
-    var invoiceItem : InvoiceItem ?= null
-    var mapPoint : MapPoint ?= null
+    @Exclude
+    fun toMap(): Map<String, Any?> {
+        return mapOf(
+            "uid" to uid,
+            "nickname" to nickname,
+        )
+    }
 }
