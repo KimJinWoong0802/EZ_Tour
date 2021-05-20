@@ -1,14 +1,11 @@
 package com.example.ez_tour
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import java.net.URL
+import kotlinx.android.synthetic.main.viewholder.view.*
 
 
 class RecyclerAdapter(private val items: ArrayList<RecycleData>) :
@@ -36,19 +33,10 @@ class RecyclerAdapter(private val items: ArrayList<RecycleData>) :
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
         fun bind(listener: View.OnClickListener, item: RecycleData) {
-            view.view_reimage
-            view.view_retag
-            view.text_rename
+            view.view_reimage.setImageDrawable(item.imageURL)
+            view.view_retag.setImageDrawable(item.imageTag)
+            view.text_rename.text = item.strName
             view.setOnClickListener(listener)
         }
     }
     }
-
-
-
-
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        fun bind(listener: View.OnClickListener, item: RecycleData) {
-        }
-    }
-}
